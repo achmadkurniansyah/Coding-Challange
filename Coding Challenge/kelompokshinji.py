@@ -33,7 +33,7 @@ class PaginationHelper():
     def page_index(self, indexes):
         if indexes < 0:
             return print(-1)
-        elif indexes > len(self.array):
+        elif indexes >= len(self.array):
             return print(-1)
         else:
             for i in range(len(itemlist)):
