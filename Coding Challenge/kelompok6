@@ -1,0 +1,40 @@
+import math
+class PaginationHelper:
+    def __init__(self, list_collection, item_per_page):
+        self.list_collection = list_collection
+        self.item_per_page = item_per_page
+
+    def item_count(self): #menghitung jumlah item keseluruhan
+        return len(self.list_collection)
+    
+    def page_count(self): #menghitung jumlah page keseluruhan
+        if self.item_count() % self.item_per_page == 0:
+            return self.item_count()/self.item_per_page
+        else:
+            return math.ceil(self.item_count()/self.item_per_page)
+
+    def page_item_count (self, page_index): #menghitung jumlah item dalam 1 page
+        if page_index >= self.page_count(): #untuk page index yg lebih besar dari jumlah page
+            return -1
+        elif page_index == self.page_count() - 1: #untuk menghitung jumlah item di page terakhir
+            return self.item_count() - self.item_per_page * page_index
+        else:
+            return self.item_per_page
+    
+    def page_index(self, item_index): #mencari index item ada di page nomor berapa
+        if item_index in range(self.item_count()):
+            return item_index//self.item_per_page
+        else:
+            return -1
+
+list_collection = ['a','b','c','d','e','f']
+helper = PaginationHelper(list_collection, 4)
+
+print (helper.page_count())
+print (helper.item_count())
+print (helper.page_item_count(0)) 
+print (helper.page_item_count(1)) 
+print (helper.page_item_count(2))
+print (helper.page_index(5))
+print (helper.page_index(2))
+print (helper.page_index(20)) 
